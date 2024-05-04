@@ -96,7 +96,7 @@ void Particle::unitTests()
         cout << "Failed." << endl;
     }
 
-    /*cout << "Applying a scale of 0.5..." << endl;
+    cout << "Applying a scale of 0.5..." << endl;
     initialCoords = m_A;
     scale(0.5);
     bool scalePassed = true;
@@ -117,9 +117,9 @@ void Particle::unitTests()
     else
     {
         cout << "Failed." << endl;
-    }*/
+    }
 
-    /*cout << "Applying a translation of (10, 5)..." << endl;
+    cout << "Applying a translation of (10, 5)..." << endl;
     initialCoords = m_A;
     translate(10, 5);
     bool translatePassed = true;
@@ -142,7 +142,7 @@ void Particle::unitTests()
         cout << "Failed." << endl;
     }
 
-    cout << "Score: " << score << " / 7" << endl;*/
+    cout << "Score: " << score << " / 7" << endl;
 }
 
 
