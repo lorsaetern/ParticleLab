@@ -2,8 +2,9 @@
 #include <cstdlib> 
 #include <time.h> 
 #include <vector>
+#include "Particle.h"
 
-//#include "Particle.h"
+//using namespace Particle;
 
 Engine::Engine()
 {
@@ -57,14 +58,14 @@ void Engine::update(float dtAsSeconds)
 	for (itr = m_particles.begin(); itr != m_particles.end();)
 	{
 		Particle myParticle = *itr;
-		if (myParticle.getTTL() > 0.0)
+		if (itr->getTTL() > 0.0)
 		{
-			update(myParticle.getTTL());
+			itr->update(dtAsSeconds);
+			++itr;
 		}
 		else
 		{
-			//itr = 
-			m_particles.erase(itr);
+			itr = m_particles.erase(itr);
 		}
 	}
 }
