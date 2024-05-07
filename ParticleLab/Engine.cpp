@@ -43,8 +43,7 @@ void Engine::input()
 		{
 			for (int i = 0; i < 5; i++)
 			{
-				int num = ((rand() % (50 - 25 + 1)) + 25);
-				//int num = 25;
+				int num = ((rand() % (80 - 60 + 1)) + 60);
 				Particle particle(m_Window, num, Mouse::getPosition(m_Window));
 				m_particles.push_back(particle);
 			}
