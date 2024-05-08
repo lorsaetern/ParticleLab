@@ -13,7 +13,6 @@ Engine::Engine()
 void Engine::run()
 {
 	Clock clock;
-	//Particle p;
 	cout << "Starting Particle unit tests..." << endl;
 	Particle p(m_Window, 4, { (int)m_Window.getSize().x / 2, (int)m_Window.getSize().y / 2 });
 	p.unitTests();
@@ -21,8 +20,7 @@ void Engine::run()
 
 	while (m_Window.isOpen())
 	{
-		clock.restart();
-		Time time = clock.getElapsedTime();
+		Time time = clock.restart();
 		input();
 		update(time.asSeconds());
 		draw();
@@ -39,11 +37,11 @@ void Engine::input()
 		{
 			m_Window.close();
 		}
-		if (event.mouseButton.button == Mouse::Left)
+		if (event.mouseButton.button == Mouse::Left && event.type == Event::MouseButtonPressed)
 		{
+			int num = ((rand() % (80 - 60 + 1)) + 60);
 			for (int i = 0; i < 5; i++)
 			{
-				int num = ((rand() % (80 - 60 + 1)) + 60);
 				Particle particle(m_Window, num, Mouse::getPosition(m_Window));
 				m_particles.push_back(particle);
 			}
@@ -56,7 +54,6 @@ void Engine::update(float dtAsSeconds)
 	vector<Particle>::iterator itr;
 	for (itr = m_particles.begin(); itr != m_particles.end();)
 	{
-		Particle myParticle = *itr;
 		if (itr->getTTL() > 0.0)
 		{
 			itr->update(dtAsSeconds);

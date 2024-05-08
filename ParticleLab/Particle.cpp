@@ -159,7 +159,7 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
     m_vx = numX;
     if (numX % 2 != 0)
     {
-        numX * -1;
+        numX *= -1;
         m_vx = numX;
     }
     m_vy = numY;
