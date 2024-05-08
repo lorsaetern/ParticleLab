@@ -8,7 +8,7 @@
 
 Engine::Engine()
 {
-	m_Window.create(VideoMode::getDesktopMode(), "Partilce", Style::Default);
+	m_Window.create(VideoMode::getDesktopMode(), "Particle", Style::Default);
 }
 void Engine::run()
 {
