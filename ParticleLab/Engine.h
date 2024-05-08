@@ -1,5 +1,6 @@
 #pragma once
-#pragma once
+#ifndef ENGINE_H_INCLUDED
+#define ENGINE_H_INCLUDED
 #include <SFML/Graphics.hpp>
 #include "Particle.h"
 using namespace sf;
@@ -27,3 +28,5 @@ public:
 	void run();
 
 };
+
+#endif
