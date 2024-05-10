@@ -1,18 +1,18 @@
-#include "Particle.h"
+#include "Particle2.h"
 using namespace sf;
 
-bool Particle::almostEqual(double a, double b, double eps)
+bool Particle2::almostEqual(double a, double b, double eps)
 {
     return fabs(a - b) < eps;
 }
 
-void Particle::unitTests()
+void Particle2::unitTests()
 {
     int score = 0;
 
     cout << "Testing RotationMatrix constructor...";
-    double theta = M_PI / 4.0;
-    RotationMatrix r(M_PI / 4);
+    double theta = _M_PI / 4.0;
+    RotationMatrix r(_M_PI / 4);
     if (r.getRows() == 2 && r.getCols() == 2 && almostEqual(r(0, 0), cos(theta))
         && almostEqual(r(0, 1), -sin(theta))
         && almostEqual(r(1, 0), sin(theta))
@@ -75,7 +75,7 @@ void Particle::unitTests()
 
     cout << "Applying one rotation of 90 degrees about the origin..." << endl;
     Matrix initialCoords = m_A;
-    rotate(M_PI / 2.0);
+    rotate(_M_PI / 2.0);
     bool rotationPassed = true;
     for (int j = 0; j < initialCoords.getCols(); j++)
     {
@@ -145,11 +145,11 @@ void Particle::unitTests()
     cout << "Score: " << score << " / 7" << endl;
 }
 
-Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosition) : m_A(2, numPoints)
+Particle2::Particle2(RenderTarget& target, int numPoints, Vector2i mouseClickPosition) : m_A(2, numPoints)
 {
-    m_ttl = TTL;
+    m_ttl = TTL2;
     m_numPoints = numPoints;
-    m_radiansPerSec = ((float)rand() / (RAND_MAX)*M_PI);
+    m_radiansPerSec = ((float)rand() / (RAND_MAX)*_M_PI);
     m_cartesianPlane.setCenter(0, 0);
     m_cartesianPlane.setSize(target.getSize().x, (-1.0) * target.getSize().y);
     Vector2i point = (mouseClickPosition);
@@ -169,8 +169,8 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
     m_color1 = Color::White;
     m_color2 = Color::Color(r, g, b);
 
-    float theta = ((float)rand() / (RAND_MAX)*M_PI / 2);
-    float dTheta = 2 * M_PI / (numPoints - 1);
+    float theta = ((float)rand() / (RAND_MAX)*_M_PI / 2);
+    float dTheta = 2 * _M_PI / (numPoints - 1);
     for (int j = 0; j < numPoints; j++)
     {
         r = ((rand() % (80 - 20 + 1)) + 20);
@@ -182,21 +182,21 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
     }
 }
 
-void Particle::update(float dt)
+void Particle2::update(float dt)
 {
-    float GG = rand() % 2501 + (-1000);
+    float _GG = rand() % 2501 + (-1000);
     m_ttl = m_ttl - dt;
     rotate(dt * m_radiansPerSec);
-    scale(SCALE);
+    scale(SCALE2);
     float dx = m_vx * dt;
     //m_vy = m_vy - (G * dt);
-    m_vy = m_vy - (GG * dt);
+    m_vy = m_vy - (_GG * dt);
     float dy = m_vy * dt;
     translate(dx, dy);
 }
-void Particle::draw(RenderTarget& target, RenderStates states) const
+void Particle2::draw(RenderTarget& target, RenderStates states) const
 {
-    VertexArray lines(TriangleFan, m_numPoints + 1);
+    VertexArray lines(TriangleStrip, m_numPoints + 1);
     Vector2f center = Vector2f(target.mapCoordsToPixel(m_centerCoordinate, m_cartesianPlane));
     lines[0].position = center;
     lines[0].color = m_color1;
@@ -207,7 +207,7 @@ void Particle::draw(RenderTarget& target, RenderStates states) const
     }
     target.draw(lines);
 }
-void Particle::rotate(double theta)
+void Particle2::rotate(double theta)
 {
     Vector2f temp = m_centerCoordinate;
     translate(-m_centerCoordinate.x, -m_centerCoordinate.y);
@@ -215,7 +215,7 @@ void Particle::rotate(double theta)
     m_A = R * m_A;
     translate(temp.x, temp.y);
 }
-void Particle::scale(double c)
+void Particle2::scale(double c)
 {
     Vector2f temp = m_centerCoordinate;
     translate(-m_centerCoordinate.x, -m_centerCoordinate.y);
@@ -223,7 +223,7 @@ void Particle::scale(double c)
     m_A = S * m_A;
     translate(temp.x, temp.y);
 }
-void Particle::translate(double xShift, double yShift)
+void Particle2::translate(double xShift, double yShift)
 {
     TranslationMatrix T(xShift, yShift, m_numPoints);
     m_A = T + m_A;

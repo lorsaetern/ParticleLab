@@ -1,22 +1,22 @@
 #pragma once
-#ifndef PARTICLE_H_INCLUDED
-#define PARTICLE_H_INCLUDED
+#ifndef PARTICLE2_H_INCLUDED
+#define PARTICLE2_H_INCLUDED
 #include "Matrices.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
 
-#define M_PI 3.1415926535897932384626433
-const float G = 1500;      //Gravity
-const float TTL = 5.0;  //Time To Live
-const float SCALE = 0.995;
+#define _M_PI 3.1415926535897932384626433
+const float G2 = 1500;      //Gravity
+const float TTL2 = 5.0;  //Time To Live
+const float SCALE2 = 0.995;
 
 using namespace Matrices;
 using namespace sf;
-class Particle : public Drawable
+class Particle2 : public Drawable
 {
 public:
-    Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosition);
+    Particle2(RenderTarget& target, int numPoints, Vector2i mouseClickPosition);
     virtual void draw(RenderTarget& target, RenderStates states) const override;
     void update(float dt);
     float getTTL() { return m_ttl; }
@@ -36,7 +36,6 @@ private:
     Color m_color1;
     Color m_color2;
     Matrix m_A;
-    Sound sound1;
 
     ///rotate Particle by theta radians counter-clockwise
     ///construct a RotationMatrix R, left mulitply it to m_A

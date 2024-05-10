@@ -10,4 +10,16 @@ int main()
 	// Quit in the usual way when the engine is stopped
 	return 0;
 }
-//Exception thrown at 0x00007FF9D914D009 (ntdll.dll) in ParticleLab.exe: 0xC00000FD : Stack overflow(parameters : 0x0000000000000001, 0x0000007AF2473FF8).
+
+//void Particle::update(float dt)
+//{
+//    float G2 = rand() % 2501 + (-1000);
+//    m_ttl = m_ttl - dt;
+//    rotate(dt * m_radiansPerSec);
+//    scale(SCALE);
+//    float dx = m_vx * dt;
+//    //m_vy = m_vy - (G * dt);
+//    m_vy = m_vy - (G2 * dt);
+//    float dy = m_vy * dt;
+//    translate(dx, dy);
+//}
